@@ -1,0 +1,8 @@
+
+"aprendizaje"
+{
+	"base" 			"helix"
+	"title" 		"Aprendizaje RP"
+	"author" 		"kiramui"
+	"menusystem"	"1"
+}
