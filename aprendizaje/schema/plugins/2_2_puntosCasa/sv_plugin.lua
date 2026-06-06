@@ -30,12 +30,13 @@ net.Receive("HousePoints_AddPoint", function(len, client)
     end
 
     local house = net.ReadString()
+    local amount = net.ReadUInt(16)
 
 
     print("Casa recibida:", house)
 
     if (PLUGIN.housePoints[house]) then
-        PLUGIN.housePoints[house] = PLUGIN.housePoints[house] + 1
+        PLUGIN.housePoints[house] = PLUGIN.housePoints[house] + amount
 
         print(
             house,
@@ -54,10 +55,11 @@ net.Receive("HousePoints_RemovePoint", function(len, client)
         return
     end
 
-    local house = net.ReadString()
+    local house  = net.ReadString()
+    local amount = net.ReadUInt(16)
 
     if (PLUGIN.housePoints[house]) then
-        PLUGIN.housePoints[house] = math.max( 0, PLUGIN.housePoints[house] - 1 )
+        PLUGIN.housePoints[house] = math.max( 0, PLUGIN.housePoints[house] - amount )
          
         print( house, "ahora tiene", PLUGIN.housePoints[house], "puntos")
     end

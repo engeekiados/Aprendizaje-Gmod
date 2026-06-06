@@ -44,29 +44,45 @@ net.Receive("HousePoints_OpenMenu", function()
 
         pointLabels[house] = label
 
+        local amountEntry = vgui.Create("DTextEntry", frame)
+
+        amountEntry:SetPos(250, y)
+        amountEntry:SetSize(60, 25)
+
+        amountEntry:SetNumeric(true)
+        amountEntry:SetValue("1")
+
         local addButton = vgui.Create("DButton", frame)
 
         addButton:SetSize(30, 25)
-        addButton:SetPos(250, y)
+        addButton:SetPos(320, y)
         addButton:SetText("+")
 
         addButton.DoClick = function()
 
+            local amount = tonumber(amountEntry:GetValue()) or 0
+            print("Sumando:", amount)
             print("Sumar a:", house)
+
             net.Start("HousePoints_AddPoint")
             net.WriteString(house)
+            net.WriteUInt(amount, 16)
             net.SendToServer()
         end
 
         local removeButton = vgui.Create("DButton", frame)
 
         removeButton:SetSize(30, 25)
-        removeButton:SetPos(290, y)
+        removeButton:SetPos(360, y)
         removeButton:SetText("-")
 
         removeButton.DoClick = function()
+            local amount = tonumber(amountEntry:GetValue()) or 0
+            print("Restando:", amount)
+            print("Restar a:", house)
             net.Start("HousePoints_RemovePoint")
             net.WriteString(house)
+            net.WriteUInt(amount, 16)
             net.SendToServer()
         end
 
